@@ -1,6 +1,5 @@
 import os
 import xlrd
-import csv
 import tqdm
 
 def csv_from_excel(dirs):
@@ -36,7 +35,7 @@ def csv_from_text(dirs):
     csv_file = open(f'./csv/{dirs[2]}/{dirs[1]}.csv', 'a')
     for line in txts:
         d = line.replace(' ', '').split('|')
-        line = ','.join(str(i) for i in d)
+        line = ','.join(str(i.replace(',', '')) for i in d)
         csv_file.write(line)
     csv_file.close()
     txt_file.close()
@@ -74,3 +73,6 @@ def run():
     paths = tqdm.tqdm(txt_files, ascii=True)
     for path in paths:
         csv_from_text(path)
+
+if __name__ == '__main__':
+    run()
